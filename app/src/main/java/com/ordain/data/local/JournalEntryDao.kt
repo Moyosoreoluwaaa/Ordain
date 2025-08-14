@@ -5,11 +5,15 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.ordain.data.model.JournalEntryEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface JournalEntryDao {
+    @Update
+    suspend fun updateJournalEntry(entry: JournalEntryEntity)
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertJournalEntry(entry: JournalEntryEntity)

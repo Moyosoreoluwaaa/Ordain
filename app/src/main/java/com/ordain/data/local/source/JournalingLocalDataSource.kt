@@ -8,6 +8,8 @@ interface JournalingLocalDataSource {
     fun getAllJournalEntries(): Flow<List<JournalEntryEntity>>
     fun getJournalEntryById(id: String): Flow<JournalEntryEntity?>
     suspend fun insertJournalEntry(entry: JournalEntryEntity)
+
+    suspend fun updateJournalEntity(entry: JournalEntryEntity)
     suspend fun deleteJournalEntry(entry: JournalEntryEntity)
 }
 
@@ -21,6 +23,10 @@ class JournalingLocalDataSourceImpl(private val journalEntryDao: JournalEntryDao
 
     override suspend fun insertJournalEntry(entry: JournalEntryEntity) =
         journalEntryDao.insertJournalEntry(entry)
+
+    override suspend fun updateJournalEntity(entry: JournalEntryEntity) {
+        journalEntryDao.updateJournalEntry(entry)
+    }
 
     override suspend fun deleteJournalEntry(entry: JournalEntryEntity) =
         journalEntryDao.deleteJournalEntry(entry)

@@ -16,14 +16,14 @@ class SaveJournalEntry(private val repository: JournalingRepository) {
         if (title.isBlank() || content.isBlank()) {
             throw IllegalArgumentException("Title and content cannot be blank.")
         }
-        val newEntry = JournalEntry(
-            id = UUID.randomUUID().toString(),
+        val entry = JournalEntry(
+            id = id ?: UUID.randomUUID().toString(),
             title = title,
             content = content,
             templateId = templateId,
             timestamp = System.currentTimeMillis()
         )
-        repository.saveJournalEntry(newEntry)
+        repository.saveJournalEntry(entry)
     }
 }
 

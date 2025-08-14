@@ -27,7 +27,7 @@ class JournalingRepositoryImpl @Inject constructor(
     override suspend fun saveJournalEntry(entry: JournalEntry) {
         val entryExists = localDataSource.getJournalEntryById(entry.id).first() != null
         if (entryExists) {
-            localDataSource.insertJournalEntry(entry.toDataModel()) // This handles both insert and update
+            localDataSource.updateJournalEntity(entry.toDataModel()) // This handles both insert and update
         } else {
             localDataSource.insertJournalEntry(entry.toDataModel())
         }
