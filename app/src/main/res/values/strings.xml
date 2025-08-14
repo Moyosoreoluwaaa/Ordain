@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Ordain</string>
+    <string name="todo_list_title">To-Do List</string>
+    <string name="add_a_new_task">Add a new task</string>
+    <string name="journaling_templates_title">Journaling Templates</string>
+    <string name="new_journal_entry_title">New Journal Entry</string>
+    <string name="journal_entry_title">Title</string>
+    <string name="journal_entry_content">Content</string>
+    <string name="save_journal_entry">Save Journal Entry</string>
+    <string name="pomodoro_timer_title">Pomodoro Timer</string>
+    <string name="start_timer">Start</string>
+    <string name="pause_timer">Pause</string>
+    <string name="reset_timer">Reset</string>
+    <string name="sessions_today">Sessions Today</string>
+    <string name="goals_title">Goals</string>
+    <string name="add_goal">Add Goal</string>
+    <string name="milestones_list_title">Milestones</string>
+    <string name="add_milestone_hint">Add a new milestone</string>
+    <string name="progress_label">Progress: %d%%</string>
+    <string name="new_goal_title">New Goal</string>
+    <string name="goal_title_hint">Goal Title</string>
+    <string name="goal_description_hint">Goal Description</string>
+    <string name="save_goal">Save Goal</string>
+    <string name="recent_journal_entries_title">Recent Entries</string>
+</resources>
