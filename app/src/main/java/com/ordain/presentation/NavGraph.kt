@@ -1,5 +1,7 @@
 package com.ordain.presentation
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -16,9 +18,23 @@ import com.ordain.ui.todo.TodoListScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = OrdainDestination.TodoList.route) {
+    val slideInFromRight = slideInHorizontally(initialOffsetX = { it })
+    val slideOutToLeft = slideOutHorizontally(targetOffsetX = { -it })
+    val slideInFromLeft = slideInHorizontally(initialOffsetX = { -it })
+    val slideOutToRight = slideOutHorizontally(targetOffsetX = { it })
+
+    NavHost(
+        navController = navController,
+        startDestination = OrdainDestination.TodoList.route,
+        enterTransition = { slideInFromRight },
+        exitTransition = { slideOutToLeft },
+        popEnterTransition = { slideInFromLeft },
+        popExitTransition = { slideOutToRight }
+    ) {
         composable(OrdainDestination.TodoList.route) {
-            TodoListScreen()
+            TodoListScreen(
+                navController
+            )
         }
         composable(OrdainBottomNavItem.Journaling.route) {
             JournalingTemplatesScreen(
@@ -27,7 +43,8 @@ fun NavGraph(navController: NavHostController) {
                 },
                 onEntrySelected = { entryId ->
                     navController.navigate(OrdainDestination.JournalingEntry.createRoute(entryId = entryId))
-                }
+                },
+                navController = navController
             )
         }
         composable(
@@ -40,15 +57,21 @@ fun NavGraph(navController: NavHostController) {
             JournalingScreen(
                 onSaveSuccess = {
                     navController.popBackStack()
+                },
+                onDeleteSuccess = {
+                    navController.navigate(OrdainBottomNavItem.Journaling.route)
                 }
             )
         }
         composable(OrdainDestination.Pomodoro.route) {
-            PomodoroScreen()
+            PomodoroScreen(
+                navController
+            )
         }
 
         composable(OrdainBottomNavItem.Goals.route) {
             GoalsScreen(
+                navController,
                 onAddGoalClick = { navController.navigate(OrdainDestination.AddGoal.route) },
                 onGoalClick = { goalId ->
                     navController.navigate(OrdainDestination.GoalDetail.createRoute(goalId))

@@ -22,4 +22,5 @@
     <string name="goal_description_hint">Goal Description</string>
     <string name="save_goal">Save Goal</string>
     <string name="recent_journal_entries_title">Recent Entries</string>
+    <string name="delete_journal_entry">Delete Journal Entry</string>
 </resources>

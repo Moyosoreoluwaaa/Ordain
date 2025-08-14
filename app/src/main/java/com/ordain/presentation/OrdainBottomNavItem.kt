@@ -10,7 +10,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 sealed class OrdainBottomNavItem(val route: String, val title: String, val icon: ImageVector) {
     object TodoList : OrdainBottomNavItem("todoList", "Todos", Icons.AutoMirrored.Filled.Assignment)
     object Journaling : OrdainBottomNavItem(
-        "journalingTemplates", "Journaling",
+        "journalingTemplates", "Journal",
         Icons.AutoMirrored.Filled.EventNote
     )
 

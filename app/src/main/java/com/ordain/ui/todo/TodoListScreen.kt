@@ -28,12 +28,15 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.ordain.R
 import com.ordain.domain.model.Todo
+import com.ordain.presentation.BottomNavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TodoListScreen(viewModel: TodoListViewModel = hiltViewModel()) {
+fun TodoListScreen(navController: NavHostController,
+                   viewModel: TodoListViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
@@ -41,6 +44,9 @@ fun TodoListScreen(viewModel: TodoListViewModel = hiltViewModel()) {
             TopAppBar(
                 title = { Text(stringResource(R.string.todo_list_title)) }
             )
+        },
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
         }
     ) { paddingValues ->
         Column(

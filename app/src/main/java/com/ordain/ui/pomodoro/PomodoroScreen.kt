@@ -31,12 +31,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.ordain.R
 import com.ordain.domain.model.PomodoroSession
+import com.ordain.presentation.BottomNavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PomodoroScreen(viewModel: PomodoroViewModel = hiltViewModel()) {
+fun PomodoroScreen( navController: NavHostController,
+    viewModel: PomodoroViewModel = hiltViewModel()
+                  ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
@@ -44,6 +48,9 @@ fun PomodoroScreen(viewModel: PomodoroViewModel = hiltViewModel()) {
             TopAppBar(
                 title = { Text(stringResource(R.string.pomodoro_timer_title)) }
             )
+        },
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
         }
     ) { paddingValues ->
         Column(
@@ -56,7 +63,10 @@ fun PomodoroScreen(viewModel: PomodoroViewModel = hiltViewModel()) {
         ) {
             Text(
                 text = formatTime(uiState.timeLeftInSeconds),
-                style = MaterialTheme.typography.displayLarge.copy(fontSize = 80.sp, fontWeight = FontWeight.Bold)
+                style = MaterialTheme.typography.displayLarge.copy(
+                    fontSize = 80.sp,
+                    fontWeight = FontWeight.Bold
+                )
             )
             Spacer(modifier = Modifier.height(32.dp))
             Row(
@@ -67,7 +77,11 @@ fun PomodoroScreen(viewModel: PomodoroViewModel = hiltViewModel()) {
                     onClick = viewModel::onStartPauseClicked,
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = if (uiState.isRunning) stringResource(R.string.pause_timer) else stringResource(R.string.start_timer))
+                    Text(
+                        text = if (uiState.isRunning) stringResource(R.string.pause_timer) else stringResource(
+                            R.string.start_timer
+                        )
+                    )
                 }
                 Spacer(modifier = Modifier.size(16.dp))
                 Button(

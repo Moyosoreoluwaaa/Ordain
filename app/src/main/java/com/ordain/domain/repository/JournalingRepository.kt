@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface JournalingRepository {
     fun getAllJournalEntries(): Flow<List<JournalEntry>>
-    fun getJournalEntryById(id: String): Flow<JournalEntry>
+    fun getJournalEntryById(id: String): Flow<JournalEntry?>
     suspend fun saveJournalEntry(entry: JournalEntry)
     suspend fun deleteJournalEntry(entry: JournalEntry)
 }

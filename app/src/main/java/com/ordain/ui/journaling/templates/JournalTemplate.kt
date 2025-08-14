@@ -3,6 +3,7 @@ package com.ordain.ui.journaling.templates
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ordain.domain.model.JournalEntry
+import com.ordain.domain.usecase.DeleteJournalEntry
 import com.ordain.domain.usecase.GetJournalEntries
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +26,8 @@ data class JournalTemplatesUiState(
 
 @HiltViewModel
 class JournalTemplatesViewModel @Inject constructor(
-    private val getJournalEntries: GetJournalEntries
+    private val getJournalEntries: GetJournalEntries,
+    private val deleteJournalEntry: DeleteJournalEntry
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(JournalTemplatesUiState())
@@ -60,38 +62,10 @@ class JournalTemplatesViewModel @Inject constructor(
             }
         }
     }
+
+    fun onDeleteEntry(entry: JournalEntry) {
+        viewModelScope.launch {
+            deleteJournalEntry(entry)
+        }
+    }
 }
-//
-//data class JournalTemplatesUiState(
-//    val templates: List<JournalTemplate> = emptyList()
-//)
-//
-//@HiltViewModel
-//class JournalTemplatesViewModel @Inject constructor() : ViewModel() {
-//
-//    private val _uiState = MutableStateFlow(
-//        JournalTemplatesUiState(
-//            templates = listOf(
-//                JournalTemplate(
-//                    id = "daily_reflection",
-//                    name = "Daily Reflection",
-//                    description = "A simple check-in to reflect on your day.",
-//                    contentPrompt = "What was the highlight of your day? What's one thing you're grateful for?"
-//                ),
-//                JournalTemplate(
-//                    id = "gratitude",
-//                    name = "Gratitude",
-//                    description = "Focus on the positive things in your life.",
-//                    contentPrompt = "List 3 things you are grateful for today and why."
-//                ),
-//                JournalTemplate(
-//                    id = "freestyle",
-//                    name = "Freestyle",
-//                    description = "Write whatever is on your mind.",
-//                    contentPrompt = "Start writing..."
-//                )
-//            )
-//        )
-//    )
-//    val uiState: StateFlow<JournalTemplatesUiState> = _uiState.asStateFlow()
-//}

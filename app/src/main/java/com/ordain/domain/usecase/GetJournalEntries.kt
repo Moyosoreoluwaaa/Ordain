@@ -13,10 +13,3 @@ class GetJournalEntry @Inject constructor(
         return journalingRepository.getJournalEntryById(entryId)
     }
 }
-class GetJournalEntries @Inject constructor(
-    private val journalingRepository: JournalingRepository
-) {
-    operator fun invoke(): Flow<List<JournalEntry>> {
-        return journalingRepository.getAllJournalEntries()
-    }
-}

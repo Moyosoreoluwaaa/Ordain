@@ -4,6 +4,7 @@ import com.ordain.domain.model.JournalEntry
 import com.ordain.domain.repository.JournalingRepository
 import kotlinx.coroutines.flow.Flow
 import java.util.UUID
+import javax.inject.Inject
 
 class SaveJournalEntry(private val repository: JournalingRepository) {
     suspend operator fun invoke(
@@ -32,7 +33,7 @@ class GetJournalEntries(private val repository: JournalingRepository) {
     }
 }
 
-class DeleteJournalEntry(private val repository: JournalingRepository) {
+class DeleteJournalEntry @Inject constructor(private val repository: JournalingRepository) {
     suspend operator fun invoke(entry: JournalEntry) {
         repository.deleteJournalEntry(entry)
     }

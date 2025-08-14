@@ -26,12 +26,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
 import com.ordain.R
 import com.ordain.domain.model.Goal
+import com.ordain.presentation.BottomNavigationBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GoalsScreen(
+    navController: NavHostController,
     viewModel: GoalsViewModel = hiltViewModel(),
     onAddGoalClick: () -> Unit,
     onGoalClick: (String) -> Unit
@@ -45,10 +48,12 @@ fun GoalsScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onAddGoalClick,
-                modifier = Modifier.padding(bottom = 60.dp)) {
+            FloatingActionButton(onClick = onAddGoalClick) {
                 Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.add_goal))
             }
+        },
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
         }
     ) { paddingValues ->
         LazyColumn(

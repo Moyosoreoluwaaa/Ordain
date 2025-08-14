@@ -18,7 +18,7 @@ interface JournalEntryDao {
     fun getJournalEntriesByDate(startOfDay: Long, endOfDay: Long): Flow<List<JournalEntryEntity>>
 
     @Query("SELECT * FROM journal_entries WHERE id = :id")
-    fun getJournalEntryById(id: String): Flow<JournalEntryEntity>
+    fun getJournalEntryById(id: String): Flow<JournalEntryEntity?>
 
     @Query("SELECT * FROM journal_entries ORDER BY timestamp DESC")
     fun getAllJournalEntries(): Flow<List<JournalEntryEntity>>
